@@ -1,10 +1,62 @@
-<h1>Boards#index</h1>
-<h2>Welcome <%= current_user.first_name%></h2>
+<h1>Welcome <%= current_user.first_name%></h1>
+<h2>All Boards</h2>
+<hr />
+<br />
 
-<% @boards.each do |board| %>
-  <div>
-    <h3><%= link_to board.name, board %> <h3>
-  </div>
-<%end%>
-<h3><%= link_to "New Board",new_board_path(@board), class: "ui orange button"%><h3>
-<p>Find me in app/views/boards/index.html.erb</p>
+<div class="ui grid">
+
+
+  <% @boards.each do |board| %>
+
+    <div class="five wide column">
+
+      <div class="ui card">
+
+        <div class="content">
+          <div class="header"> <h2><%= link_to board.name, board %></h2> </div>
+        </div>
+        <div class="content">
+          <h4 class="ui sub header">Activity</h4>
+          <div class="ui small feed">
+            <div class="event">
+              <div class="content">
+                <div class="summary">
+                  <a>Elliot Fu</a> added <a>Jenny Hess</a> to the project
+                </div>
+              </div>
+            </div>
+            <div class="event">
+              <div class="content">
+                <div class="summary">
+                  <a>Stevie Feliciano</a> was added as an <a>Administrator</a>
+                </div>
+              </div>
+            </div>
+            <div class="event">
+              <div class="content">
+                <div class="summary">
+                  <a>Helen Troy</a> added two pictures
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="extra content">
+          <%= link_to 'Edit Board', edit_board_path(board), class: "inverted ui blue button" %>
+          <%= link_to 'Delete Board', board, method: :delete, class: "inverted ui red button" %>
+        </div>
+
+      </div>
+
+
+    </div>
+    <br />
+  <%end%>
+    
+
+
+  <div class="five wide column">
+    <h3><%= link_to "+",new_board_path(@board), class: "massive ui green button"%></h3>
+  </div> 
+</div>
