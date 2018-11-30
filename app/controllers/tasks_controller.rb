@@ -1,25 +1,16 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:edit, :update, :destroy]
   before_action :set_list
-
-
-  def index
-    @tasks = @list.tasks
-  end
-
-  def show
-  end
 
   def new
     @task = @list.tasks.new
-    render partial: "form"
   end
 
   def create
     @task = @list.tasks.new(task_params)
 
     if @task.save
-      redirect_to [@list, @task]
+      redirect_to board_path(@list.board_id)
     else
       render :new
     end
@@ -30,7 +21,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to [@list, @task]
+      redirect_to board_path(@list.board_id)
     else
       render :edit
     end
@@ -38,19 +29,19 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to list_tasks_path
+    redirect_to board_path(@list.board_id)
   end
 
   private
     def task_params
-      params.require(:task).permit(:name)
-    end
-
-    def set_task
-      @task = list.task.find(params[:id])
+      params.require(:task).permit(:name, :desc)
     end
 
     def set_list
-      @list = current_user.lists.find(params[:list_id])
+      @list = List.find(params[:list_id])
+    end
+
+    def set_task
+      @task = Task.find(params[:id])
     end
 end

@@ -1,0 +1,16 @@
+<h1><%= @task.id ? 'Edit Task' : 'Create Task' %></h1>
+<hr />
+<br />
+
+
+
+<%= form_for [@list, @task], :html => { class: "ui form" } do |f| %>
+  <div class = "field">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "input" %>
+
+    <%= f.label :description %>
+    <%= f.text_area :desc, class: "input" %>
+  </div>
+  <%= f.submit nil, class: "ui inverted green button" %>
+<% end %>

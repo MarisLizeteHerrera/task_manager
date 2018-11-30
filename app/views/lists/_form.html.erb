@@ -1,7 +1,10 @@
-<h1><%= @list.id ? 'Edit list' : 'Create list' %></h1>
+<h1><%= @list.id ? 'Edit List' : 'Create List' %></h1>
 <hr />
 <br />
-<%= form_with(model: @list, local: true, class: "ui form") do |f| %>
+
+
+
+<%= form_for [@board, @list], :html => { class: "ui form" } do |f| %>
   <div class = "field">
     <%= f.label :name %>
     <%= f.text_field :name, class: "input" %>

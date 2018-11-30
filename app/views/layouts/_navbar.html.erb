@@ -4,6 +4,11 @@
   </div>
 
   <div class="right menu">
+
+    <% if current_user %>
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "item" %>
+    <% end %>
+
     <% if current_user %>
       <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "item" %>
     <% else %>

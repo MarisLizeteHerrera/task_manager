@@ -3,4 +3,54 @@
 <%= link_to 'Back', boards_path, class: "ui blue button" %>
 </h1>
 <hr />
+<br />
 
+
+
+
+
+<div class="ui grid">
+
+
+  <% @board.lists.each do |list| %>
+    <div class="four wide column">
+      <div class="ui card">
+        <div class="content">
+          <div class="header"> <h2><%=list.name%></h2> </div>
+        </div>
+        
+        <h3><%= link_to '+ Add Task', new_list_task_path(list), class: "ui green bottom attached button" %></h3>
+        
+        <% list.tasks.each do |task| %>
+          <div class="ui card">
+
+            <div class="content">
+              <div class="header"> <h3><%=task.name%></h3> </div>
+              <br />
+              <div class="header"> <h4><%=task.desc%></h4> </div>
+            </div>
+          
+            <div class="ui two bottom attached buttons">
+              <%= link_to 'Edit Task', edit_list_task_path(task.list_id, task.id), class: "ui button" %>
+              <%= link_to 'Delete Task', list_task_path(task.list_id, task.id), method: :delete, class: "ui button" %>
+            </div>
+          </div>
+          <br />
+        <%end%>
+
+
+        <div class="ui two bottom attached buttons">
+          <%= link_to 'Edit List', edit_board_list_path(list.board_id, list.id), class: "inverted ui blue button" %>
+          <%= link_to 'Delete List', list, method: :delete, class: "inverted ui red button" %>
+        </div>
+      </div>
+    </div>
+    <br />
+  <%end%>
+    
+
+
+  <div class="four wide column">
+    <h3><%= link_to '+', new_board_list_path(@board), class: "massive ui green button" %></h3>
+  </div> 
+</div>
